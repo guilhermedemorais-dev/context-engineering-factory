@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local env
+.env
+
+# MCP config (local)
+factory-workflow/config/mcp.toml
+
+# Runtime outputs
+factory-workflow/bots/runtime/out/
+factory-workflow/bots/runtime/.env
