@@ -24,6 +24,7 @@ Definir requisitos de gate (nao executaveis) para pipelines.
 3) **Qualidade e testes**
    - Quality bars atendidas.
    - Testes executados conforme estrategia.
+   - Projetos com UI navegavel rodam `qa-e2e-browser-audit` com relatorio e evidencias.
 4) **Documentacao e evidencias**
    - Research/Plan atualizados com links e evidencias.
    - Decision records quando aplicavel.
@@ -41,6 +42,7 @@ Definir requisitos de gate (nao executaveis) para pipelines.
 - [ ] Context compliance verificado.
 - [ ] Reuso verificado.
 - [ ] Testes completos.
+- [ ] Browser audit executado quando houver UI navegavel.
 - [ ] Docs/evidencias atualizadas.
 - [ ] Seguranca auditada.
 - [ ] Release readiness confirmada.

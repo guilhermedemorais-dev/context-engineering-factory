@@ -19,6 +19,7 @@ Servidores MCP fornecem contexto confiavel, documentacao e padroes externos.
 
 ## Servidores recomendados
 - Context7: `factory-workflow/libs/mcp/servers/context7.md`
+- Chrome DevTools: `factory-workflow/libs/mcp/servers/chrome-devtools.md`
 - StackOverflow (auxiliar): `factory-workflow/libs/mcp/servers/stackoverflow.md`
 
 ## Evidencias em PR

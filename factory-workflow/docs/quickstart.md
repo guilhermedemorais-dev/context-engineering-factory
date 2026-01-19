@@ -72,9 +72,22 @@ python factory-workflow/bots/runtime/cli.py run dev \
   --project "/apps/<projeto>"
 ```
 
+## Rodar auditoria de browser (QA)
+
+Exemplo (qa-e2e-browser-audit):
+```bash
+python factory-workflow/bots/runtime/cli.py run qa-e2e-browser-audit \
+  --task "Browser audit: baseUrl=https://app.exemplo.com urls=[/login,/checkout] ruleset=padrao+projeto" \
+  --workspace "." \
+  --project "/apps/<projeto>"
+```
+
+Se o runtime nao suportar esse bot, trate como contrato e registre GAP.
+
 Notas:
 - `--workspace` sempre aponta para a raiz do repo.
 - O dev bot **nao escreve fora de** `/apps/<projeto>` (protecao de path).
+- Relatorios e artefatos do browser audit ficam em `factory-workflow/tests/reports/qa-e2e-browser-audit/`.
 
 ## Troubleshooting
 - MCP falhou ou nao cobriu o tema? **Registre GAP e pare.**

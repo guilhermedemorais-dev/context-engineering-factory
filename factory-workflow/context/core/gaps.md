@@ -72,6 +72,16 @@ Qualquer duvida bloqueante deve ser registrada aqui.
 - Owner: TBD
 - Status: OPEN
 
+
+### GAP-TOOLING-002
+- ID: GAP-TOOLING-002
+- Data: 2026-01-19
+- Descricao: Bot `qa-e2e-browser-audit` e contrato de Chrome DevTools MCP nao estao implementados no runtime/CLI.
+- Impacto: BLOQUEIA auditoria automatizada via CLI.
+- Owner: TBD
+- Status: OPEN
+- Next step: implementar suporte no runtime (bot + MCP) ou definir executor externo.
+
 ## Gaps Resolvidos
 
 ### GAP-CORE-008

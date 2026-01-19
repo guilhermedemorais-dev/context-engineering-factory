@@ -20,6 +20,15 @@ base_url = "ENV:SHADCN_REGISTRY_URL"
 enabled = false
 endpoint = "ENV:PLAYWRIGHT_ENDPOINT"
 
+
+[chrome_devtools]
+enabled = false
+endpoint = "ENV:CHROME_DEVTOOLS_ENDPOINT"
+executable = "ENV:CHROME_DEVTOOLS_EXECUTABLE"
+browser_channel = "ENV:CHROME_DEVTOOLS_CHANNEL"
+headless = "ENV:CHROME_DEVTOOLS_HEADLESS"
+output_dir = "ENV:CHROME_DEVTOOLS_OUTPUT_DIR"
+
 [mcp_security_audit]
 enabled = false
 endpoint = "ENV:MCP_SECURITY_AUDIT_ENDPOINT"

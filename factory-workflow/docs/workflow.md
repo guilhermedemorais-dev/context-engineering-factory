@@ -15,6 +15,10 @@ Reduzir retrabalho, evitar overengineering e impedir reinvencao da roda.
 3) **Implement**
    - Executar somente apos Plan aprovado
    - Atualizar codigo + docs + testes
+4) **QA**
+   - Executar testes e auditorias apos Implement
+   - Para UI navegavel, rodar `qa-e2e-browser-audit` (Chrome DevTools MCP)
+   - Registrar relatorios e evidencias
 
 ## Regras de contexto
 - **Keep context utilization < 40%** (guideline).

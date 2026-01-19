@@ -19,6 +19,9 @@
 - [ ] Gates de `factory-workflow/cicd/gates.md` atendidos.
 - [ ] Estagios de `factory-workflow/cicd/strategy.md` executados conforme aplicavel.
 - [ ] Testes unit/integration/e2e/security executados e com evidencias.
+- [ ] Relatorio de browser audit (qa-e2e-browser-audit) quando houver UI navegavel.
+- [ ] Evidencias do browser audit (screenshots/logs) anexadas.
+- [ ] Baseline de performance registrada no relatorio.
 - [ ] Quality bars atendidas quando aplicavel.
 - [ ] Nenhuma inconsistencia de contexto.
 - [ ] MCP evidenciado (links + sumario).
