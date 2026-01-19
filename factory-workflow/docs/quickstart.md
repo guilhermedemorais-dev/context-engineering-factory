@@ -82,7 +82,7 @@ python factory-workflow/bots/runtime/cli.py run qa-e2e-browser-audit \
   --project "/apps/<projeto>"
 ```
 
-Se o runtime nao suportar esse bot, trate como contrato e registre GAP.
+Requer `factory-workflow/config/mcp.toml` com `[chrome_devtools]` habilitado (ou `FACTORY_MCP_CONFIG`).
 
 Notas:
 - `--workspace` sempre aponta para a raiz do repo.

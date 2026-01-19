@@ -41,6 +41,11 @@ For dev bot (requires a project path under /apps):
 python factory-workflow/bots/runtime/cli.py run dev --task "Implement feature X" --workspace "/path/to/workspace" --project "/apps/my-project"
 ```
 
+For browser audit bot (requires chrome_devtools in mcp.toml):
+```
+python factory-workflow/bots/runtime/cli.py run qa-e2e-browser-audit --task "Browser audit baseUrl=https://app.exemplo.com" --workspace "/path/to/workspace"
+```
+
 ## Outputs
 - Execution outputs: `factory-workflow/bots/runtime/out/<timestamp>/<bot>/`
 - Deliverables:
@@ -50,4 +55,5 @@ python factory-workflow/bots/runtime/cli.py run dev --task "Implement feature X"
 ## Notes
 - If context is missing, the bot will append gaps to `factory-workflow/context/core/gaps.md` and stop.
 - Paths are validated; path traversal is blocked.
+- Browser audit requer `factory-workflow/config/mcp.toml` com `[chrome_devtools]` habilitado (ou `FACTORY_MCP_CONFIG`).
 - LLM token limit can be set via `FACTORY_LLM_MAX_COMPLETION_TOKENS` or `llm.max_completion_tokens` in `factory-workflow/bots/runtime/config.yaml`.
