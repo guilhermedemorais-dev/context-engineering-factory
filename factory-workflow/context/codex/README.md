@@ -1,5 +1,8 @@
 # Codex (manual operacional)
 
+Nota: apesar do nome desta pasta, a Factory e agnostica de modelo e pode ser
+utilizada por qualquer IA de codificacao (ou por humanos).
+
 ## Objetivo
 Esta pasta centraliza o manual operacional para uso do Codex e de agentes. Ela define como ler contexto, como agir em caso de gaps e como respeitar gates de qualidade antes de qualquer entrega.
 

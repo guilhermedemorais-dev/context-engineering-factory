@@ -1,5 +1,8 @@
 # DEPRECATED: Codex
 
+Nota: apesar do nome "codex", a Factory e agnostica de modelo e pode ser usada
+por qualquer IA de codificacao (ou por humanos).
+
 Esta pasta foi migrada para `factory-workflow/context/codex/`.
 
 Use:
