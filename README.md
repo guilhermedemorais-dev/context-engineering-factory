@@ -106,3 +106,11 @@ DEPLOY
 - Politica MCP: `factory-workflow/context/tooling/mcp-policy.md`
 - Runtime local (CLI): `factory-workflow/context/tooling/runtime.md`
 - Quickstart: `factory-workflow/docs/quickstart.md`
+
+---
+
+## Ultimas atualizacoes (main)
+
+- 2026-01-25 — Add GitHub Actions workflow for Python package publishing (commit `9414abf`)
+- 2026-01-19 — feat(factory): enable qa-e2e-browser-audit runtime bot (commit `d6c0c0a`)
+- 2026-01-19 — feat(factory): add chrome devtools mcp + browser audit qa bot (commit `97c1bd2`)
