@@ -8,6 +8,8 @@
 ## Conceito base
 - **Executor de IA** (IDE assistant / LLM executor) edita arquivos.
 - **Bots Python** so executam via **CLI local** (ou CI configurado).
+- **Engines + Agents** definem contratos de entrada/saida e permissoes.
+- **Skill resolver** monta fila de execucao e aplica politicas.
 
 ## Setup minimo do runtime
 
@@ -99,3 +101,4 @@ Notas:
 - Runtime local: `factory-workflow/context/tooling/runtime.md`
 - Politica MCP: `factory-workflow/context/tooling/mcp-policy.md`
 - MCP libs: `factory-workflow/libs/mcp/README.md`
+- Arquitetura autonoma: `factory-workflow/docs/architecture/autonomous-factory.md`

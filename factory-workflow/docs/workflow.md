@@ -20,6 +20,21 @@ Reduzir retrabalho, evitar overengineering e impedir reinvencao da roda.
    - Para UI navegavel, rodar `qa-e2e-browser-audit` (Chrome DevTools MCP)
    - Registrar relatorios e evidencias
 
+## Autonomia (skill resolver + engines)
+1) Orchestrator recebe intent
+2) Skill resolver detecta gaps e monta fila de agentes
+3) Planner engine gera research + plan
+4) Execution engine aplica mudancas aprovadas
+5) Quality + Security engines validam e registram evidencias
+6) Doc engine atualiza docs e arquitetura
+7) Distribution engine prepara release apos QA
+
+## Policy engine (nao opcional)
+- Nenhuma escrita sem plan aprovado
+- Nenhum deploy sem QA engine
+- Nenhuma decisao sem justificativa registrada
+- Nenhuma acao destrutiva sem confirmacao humana
+
 ## Regras de contexto
 - **Keep context utilization < 40%** (guideline).
 - **Intentional compaction**: ao trocar de sessao, gerar `progress.md`.
@@ -58,3 +73,4 @@ Arquivos:
 - Qualidade: `factory-workflow/context/quality/*`
 - Gates CI/CD: `factory-workflow/cicd/gates.md` e `factory-workflow/cicd/checklist.md`
 - Governanca: `factory-workflow/governance/*` (ADRs, risks)
+- Arquitetura autonoma: `factory-workflow/docs/architecture/autonomous-factory.md`
