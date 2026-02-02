@@ -10,9 +10,13 @@ Gaps sao faltas, ambiguidades ou conflitos no contexto que bloqueiam decisao ou 
 - Impacto:
 - Owner:
 - Status: OPEN | DECIDED | DEFERRED
+- **Sugestao de Solucao:** (obrigatório - o agente DEVE propor uma solução para o dev aprovar)
 
 ## Regra
-Qualquer duvida bloqueante deve ser registrada aqui.
+- Qualquer duvida bloqueante deve ser registrada aqui.
+- **Todo gap DEVE incluir uma Sugestao de Solucao.** O desenvolvedor pode aprovar, rejeitar ou discutir.
+- O desenvolvedor responde: "Aplique a sugestão do GAP-XXX" ou discute alternativas.
+
 
 ## Gaps Abertos
 
