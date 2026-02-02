@@ -6,8 +6,8 @@ Definir e manter a arquitetura do framework e as regras estruturais do contexto 
 
 ## Entradas (obrigatórias)
 - `factory-workflow/context/core/principles.md`
-- `factory-workflow/context/core/scope.md`
-- `factory-workflow/context/core/guardrails.md`
+- `factory-workflow/context/quality/*`
+- `library/skills/INDEX.md` (Catálogo de Skills)
 - `factory-workflow/governance/*` (quando existir)
 
 ## Saídas
@@ -16,8 +16,8 @@ Definir e manter a arquitetura do framework e as regras estruturais do contexto 
 - Atualizações de dependências entre módulos (`factory-workflow/plan/dependencies.md`)
 
 ## Regras
-- Não implementa código.
-- Não cria estruturas novas sem passar pelo Orchestrator.
+- **Skills de Arquitetura**: Consulte o `INDEX.md` e busque por tags como `architecture`, `database-design`, `cloud`, etc. Use o conhecimento das skills para fundamentar suas decisões.
+- **Evidência**: Toda decisão técnica não-trivial deve ter base em dados ou documentação (research).estrator.
 - Deve manter o framework agnóstico (evitar stack-specific).
 
 ## Checklist

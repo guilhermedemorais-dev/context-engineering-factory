@@ -11,7 +11,9 @@ from .fs import SafeFS
 from .llm import build_llm
 from .logger import log_event
 from .prompt_loader import load_prompt
+from .jobs import Job, dump_job, normalize_jobs, write_job
 from .tools import build_filesystem_tools, build_mcp_tools
+from .artifacts import write_artifacts
 
 DOC_BOTS = {
     "orchestrator",
@@ -34,6 +36,7 @@ class RunResult:
     summary: str
     deliverables: List[Dict[str, str]]
     gaps: List[str]
+    jobs: List[Job]
     raw: str
 
 
@@ -57,6 +60,7 @@ def _parse_response(text: str) -> Dict[str, Any]:
         "summary": "Unstructured response",
         "deliverables": [],
         "gaps": [],
+        "jobs": [],
     }
 
 
@@ -120,6 +124,7 @@ def run_bot(
                 summary="Missing project path for dev bot",
                 deliverables=[],
                 gaps=["Missing --project path"],
+                jobs=[],
                 raw="",
             )
         project_path = project_path.resolve()
@@ -152,14 +157,38 @@ def run_bot(
     else:
         path_rules = "Deliverables should be under factory-workflow or runtime/out"
 
+    # Extra guardrail for context-sync: ensure docs inputs are present.
+    if bot_name == "context-sync":
+        required = [workspace / "docs" / "prd.md", workspace / "docs" / "ui-ux.md", workspace / "docs" / "tech.md"]
+        missing = [str(p) for p in required if not p.exists()]
+        if missing:
+            gaps_path = factory_root / "context" / "core" / "gaps.md"
+            fs = SafeFS(allowed_roots=allowed_roots, base_dir=workspace)
+            _append_gaps(
+                fs,
+                gaps_path,
+                bot_name,
+                task,
+                [f"Missing required project docs file: {m}" for m in missing],
+            )
+            return RunResult(
+                status="BLOCKED",
+                summary="Missing required ./docs/*.md inputs for context-sync",
+                deliverables=[],
+                gaps=[f"Missing docs inputs: {', '.join(missing)}"],
+                jobs=[],
+                raw="",
+            )
+
     system_prompt = (
         f"You are the Factory bot '{bot_name}'.\n\n"
         f"Contract:\n{prompt}\n\n"
         f"Context pack (may be truncated={context_pack.truncated}):\n{context_pack.text}\n\n"
-        "Return JSON with keys: status, summary, deliverables, gaps, notes.\n"
+        "Return JSON with keys: status, summary, deliverables, gaps, jobs, notes.\n"
         "- status: OK or BLOCKED\n"
         "- deliverables: list of {path, content} using absolute paths\n"
         "- gaps: list of missing info questions\n"
+        "- jobs: optional list of follow-up jobs\n"
         f"Path rules: {path_rules}\n"
         "If anything is missing or ambiguous, set status=BLOCKED and list gaps."
     )
@@ -174,20 +203,52 @@ def run_bot(
     text = response.content if hasattr(response, "content") else str(response)
 
     parsed = _parse_response(text)
+    jobs = normalize_jobs(parsed.get("jobs"))
+
     result = RunResult(
         status=str(parsed.get("status", "OK")),
         summary=str(parsed.get("summary", "")),
         deliverables=list(parsed.get("deliverables", []) or []),
         gaps=list(parsed.get("gaps", []) or []),
+        jobs=jobs,
         raw=text,
     )
 
     run_fs = SafeFS(allowed_roots=[output_root], base_dir=workspace)
-    run_fs.write_text(run_dir / "response.txt", text)
+    raw_path = run_dir / "response.txt"
+    run_fs.write_text(raw_path, text)
     run_fs.write_text(
         run_dir / "summary.md",
         f"# {bot_name} run\n\nStatus: {result.status}\n\n{result.summary}\n",
     )
+
+    # Persist jobs suggested by the LLM (autonomy).
+    if result.jobs:
+        payload = [dump_job(job) for job in result.jobs]
+        run_fs.write_text(run_dir / "jobs.json", json.dumps(payload, indent=2, ensure_ascii=False))
+
+        if bool(config.get("runtime", {}).get("auto_enqueue_jobs", False)):
+            queue_dir = Path(config.get("runtime", {}).get("queue_dir", "factory-workflow/bots/runtime/queue"))
+            if not queue_dir.is_absolute():
+                queue_dir = (workspace / queue_dir).resolve()
+            for job in result.jobs:
+                write_job(queue_dir, job, suffix=".json")
+
+    # Machine-readable artifacts (stable contract)
+    try:
+        write_artifacts(
+            run_dir=run_dir,
+            bot_name=bot_name,
+            status=result.status,
+            summary=result.summary,
+            deliverables=result.deliverables,
+            gaps=result.gaps,
+            jobs=result.jobs,
+            raw_response_path=raw_path,
+        )
+    except Exception as exc:
+        # Never crash the run due to artifacts write
+        run_fs.write_text(run_dir / "artifacts.error.txt", str(exc))
 
     for item in result.deliverables:
         path = item.get("path")

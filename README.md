@@ -1,26 +1,31 @@
-# 🏭 Factory
+# 🏭 Factory (Context Engineering + Spec-driven Delivery)
 
-> **Framework publico para Context Engineering, Spec-driven Delivery e governanca de entrega de software.**
+> Framework (por enquanto **interno**) para **Context Engineering**, **Spec-driven Delivery** e **governança de entrega de software**.
 
-Factory existe para resolver um problema simples e ignorado:
+A Factory existe para resolver um problema simples e ignorado:
 
-🚨 **IA nao falha por codigo.**  
-**IA falha por CONTEXTO mal definido.**
+- IA raramente falha por "não saber codar".
+- IA falha por **contexto mal definido**, **decisões não registradas** e **planos fracos**.
 
----
-
-## 🎯 O que e a Factory
-
-Factory e o **sistema operacional do desenvolvimento de software**.
-
-Ela nao gera codigo sozinha.  
-Ela define **como pesquisar, decidir, planejar, validar e automatizar** a construcao de software — **antes**, **durante** e **depois** da implementacao.
+A proposta aqui é transformar desenvolvimento com IA (e sem IA) em um processo **auditável**, **repetível** e **seguro**.
 
 ---
 
-## 🧭 Workflow canonico: RPI (Research → Plan → Implement)
+## 🎯 O que é a Factory
 
-### Fluxo (Mermaid)
+A Factory é um **sistema operacional de entrega**.
+
+Ela não "gera código magicamente". Ela define:
+- como **pesquisar** (com evidências)
+- como **decidir** (com registro)
+- como **planejar** (com escopo, passos e testes)
+- como **implementar** (com proteções)
+- como **validar** (com QA e gates)
+- como **publicar** (com controle humano)
+
+---
+
+## 🧭 Workflow canônico: RPI (Research → Plan → Implement)
 
 ```mermaid
 flowchart TD
@@ -32,133 +37,68 @@ flowchart TD
     F --> G[🚀 Deploy]
 ```
 
-### Fluxo (fallback)
-
-```
-IDEIA
-  ↓
-RESEARCH (evidencias + gaps)
-  ↓
-PLAN (escopo + passos + testes)
-  ↓
-IMPLEMENT (codigo + docs)
-  ↓
-TESTES
-  ↓
-GATES
-  ↓
-DEPLOY
-```
+Regras do jogo:
+- **Sem Research** você vira refém de suposições.
+- **Sem Plan aprovado** você vira refém de retrabalho.
+- **Sem QA/gates** você vira refém de sorte.
 
 ---
 
-## 🤖 Execucao e bots
+## 🤖 Execução (IA + bots)
 
-- **Executor de IA** (IDE assistant / LLM executor) edita arquivos.
-- **Bots Python** executam **apenas via CLI local** (ou CI configurado).
-- Nada executa sem contexto fechado; gaps devem ser registrados.
+- **Executor de IA** (IDE assistant / LLM executor) **edita arquivos**.
+- **Bots em Python** executam **apenas via CLI local** (ou CI configurado).
+- Se existir gap, o sistema **registra e para**.
 
-👉 **Como executar bots:** veja `factory-workflow/docs/quickstart.md`.
+👉 Como executar bots: `factory-workflow/docs/quickstart.md`
 
 ---
 
-## 🧠 Contexto e governanca
+## 🧠 Contexto e governança (fontes de verdade)
 
-- **Contexto e fonte de verdade:** `factory-workflow/context/*`.
-- **Reuso antes de criar:** politica MCP em `factory-workflow/context/tooling/mcp-policy.md`.
-- **Seguranca e gates:** `factory-workflow/cicd/*`.
-- **Governanca e auditoria:** `factory-workflow/governance/*`.
+- **Ordem de leitura do contexto (obrigatória):** `factory-workflow/context/INDEX.md`
+- **Políticas (não-opcionais):** `factory-workflow/policies/policy-engine.md`
+- **CI/CD e gates:** `factory-workflow/cicd/*`
+- **Governança e auditoria:** `factory-workflow/governance/*`
 
 ---
 
 ## 📁 Estrutura essencial
 
 - `factory-workflow/docs/` → onboarding, workflow, templates
-- `factory-workflow/context/` → core, quality, tooling, UI, codex
+- `factory-workflow/context/` → fontes de verdade (core, quality, tooling, UI, codex)
 - `factory-workflow/bots/` → contratos de bots (Markdown)
 - `factory-workflow/bots/runtime/` → runtime local (CLI)
-- `factory-workflow/libs/mcp/` → servers e registries MCP
 - `factory-workflow/cicd/` → gates, checklist, deploy
 
 ---
 
-## 🚀 Por onde comecar
+## 🚀 Por onde começar
 
-1) `factory-workflow/docs/quickstart.md`  
-2) `factory-workflow/docs/workflow.md`  
-3) `factory-workflow/docs/templates/README.md`  
-4) `factory-workflow/docs/examples/README.md`
+1) Copie `Docs.example/` para a raiz do seu projeto e renomeie para `docs/` (preencha os PRDs)
+2) Rode `context-sync` para popular `factory-workflow/context/*`
+3) Use o workflow RPI (Research → Plan → Implement)
 
----
-
-## 🧩 Tutorial rapido (setup + uso)
-
-### Setup na maquina (uma vez)
-1) Python 3.10+ e Git instalados
-2) Criar venv e instalar deps do runtime:
-```bash
-python -m venv .venv
-. .venv/bin/activate
-pip install -r factory-workflow/bots/runtime/requirements.txt
-```
-3) Criar `.env` local:
-```bash
-cp factory-workflow/bots/runtime/.env.example .env
-```
-4) Configurar MCPs locais:
-```bash
-cp factory-workflow/config/mcp.example.toml factory-workflow/config/mcp.toml
-```
-
-### Setup no projeto (kickoff)
-1) Criar docs do projeto:
-`factory-workflow/docs/projects/<projeto>/`
-2) Preencher documentos base:
-`docs.md`, `stack.md`, `design-system.md`, `mcp.md`
-3) Criar referencia detalhada:
-`docs/projects/<projeto>/reference/` (modulos, paginas, regras, fluxos, data-contracts)
-4) Gerar diagramas (Mermaid):
-`docs/projects/<projeto>/architecture/frontend-flow.md`
-`docs/projects/<projeto>/architecture/backend-flow.md`
-5) Rodar o checklist completo:
-`factory-workflow/docs/templates/project-kickoff.checklist.md`
-
-### Setup em projeto existente (takeover)
-1) Preencher checklist completo:
-`factory-workflow/docs/templates/project-takeover.checklist.md`
-2) Registrar gaps em `factory-workflow/context/core/gaps.md`
-3) Criar/atualizar referencia em `docs/projects/<projeto>/reference/`
-
-### Quando tudo estiver pronto
-Peça ao Factory: **Research + Plan + Queue** (nenhuma implementacao sem plan aprovado).
-Use o guia: `factory-workflow/docs/modelo factory.md`.
-
----
-
-## 🔐 Regras inegociaveis
-
-- Contexto fechado antes de executar.
-- Plan aprovado antes de implementar.
-- Evidencias e links em Research/Plan.
-- Producao exige aprovacao humana.
-
----
-
-## 🔗 Referencias rapidas
-
-- Workflow RPI: `factory-workflow/docs/workflow.md`
-- Politica MCP: `factory-workflow/context/tooling/mcp-policy.md`
-- Runtime local (CLI): `factory-workflow/context/tooling/runtime.md`
+Referências:
 - Quickstart: `factory-workflow/docs/quickstart.md`
-- Modelo de uso (prompt mestre): `factory-workflow/docs/modelo factory.md`
-- Templates completos: `factory-workflow/docs/templates/README.md`
+- Workflow RPI: `factory-workflow/docs/workflow.md`
+- Templates internos: `factory-workflow/docs/templates/README.md`
 - Exemplos: `factory-workflow/docs/examples/README.md`
 
 ---
 
-## Ultimas atualizacoes (main)
+## 🔐 Regras inegociáveis
 
-- 2026-01-25 — docs: add tutorial de uso, templates de referencia, checklists e diagramas
-- 2026-01-25 — Add GitHub Actions workflow for Python package publishing (commit `9414abf`)
-- 2026-01-19 — feat(factory): enable qa-e2e-browser-audit runtime bot (commit `d6c0c0a`)
-- 2026-01-19 — feat(factory): add chrome devtools mcp + browser audit qa bot (commit `97c1bd2`)
+- **Contexto fechado** antes de executar.
+- **Plan aprovado** antes de implementar.
+- **Evidências e links** em Research/Plan.
+- **Produção exige aprovação humana**.
+
+---
+
+## Últimas atualizações
+
+- 2026-01-25 - docs: tutorial de uso, templates, checklists e diagramas
+- 2026-01-25 - CI: workflow de publish de pacote Python (commit `9414abf`)
+- 2026-01-19 - feat(factory): enable qa-e2e-browser-audit runtime bot (commit `d6c0c0a`)
+- 2026-01-19 - feat(factory): add chrome devtools mcp + browser audit qa bot (commit `97c1bd2`)

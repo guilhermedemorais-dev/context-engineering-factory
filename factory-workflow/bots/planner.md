@@ -8,16 +8,21 @@ Converter contexto e princípios em plano executável: milestones, dependências
 - `factory-workflow/context/core/scope.md`
 - `factory-workflow/context/quality/quality-bars.md`
 - `factory-workflow/cicd/strategy.md` (quando existir)
+- `factory-workflow/cicd/strategy.md` (quando existir)
+- `docs.prd/*` (Fonte da Verdade - PRDs)
+- `library/skills/INDEX.md` (Catálogo de Skills - Obrigatório)
 - `factory-workflow/tests/*`
 
 ## Saídas
-- `factory-workflow/plan/roadmap.md`
-- `factory-workflow/plan/milestones.md`
-- `factory-workflow/plan/dependencies.md`
+- `factory-workflow/docs.fabrication/roadmap.md`
+- `factory-workflow/docs.fabrication/milestones.md`
+- `factory-workflow/docs.fabrication/dependencies.md`
 
 ## Regras
-- Não inventa requisitos.
-- Não cria “tarefas gigantes”: quebrar em passos pequenos.
+- **PRD First**: Se houver arquivos em `docs.prd`, eles são a LEI. Leia-os completamente.
+- **Mapeamento de Skills**: Analise o PRD e cruze com o `INDEX.md` da Library.
+- Não inventa requisitos fora do PRD.
+- **Quebra nuclear**: Tasks não podem durar mais de 4h. Se durar, quebre.ar em passos pequenos.
 - Deve alinhar milestones com gates de qualidade/CI.
 
 ## Checklist
