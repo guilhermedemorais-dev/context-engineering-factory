@@ -7,18 +7,19 @@ A Factory existe para transformar o desenvolvimento de software com IA em um pro
 
 ---
 
-## 🛑 O Problema: Por que IA falha em projetos reais?
+## � A Ciência da Ineficiência: Por que 50% do tempo é perdido?
 
-Se você já tentou criar software complexo com IA, conhece estas dores:
+Não é mágica, é processo. A Factory ataca diretamente os gargalos invisíveis do desenvolvimento com IA:
 
-| A Dor (O Caos) | A Solução Factory (A Ordem) |
-| :--- | :--- |
-| **"Amnésia da IA"** <br> A IA esquece o que fez na sessão anterior ou perde o fio da meada. | **Contexto Persistente** <br> Memória estruturada em `factory-workflow/context` e `gaps.md`. O contexto nunca morre. |
-| **Microgerenciamento** <br> Você gasta mais tempo explicando *o que fazer* do que codando. | **Spec-driven** <br> PRDs viram PLANOS aprovados antes de virarem CÓDIGO. Menos chat, mais entrega. |
-| **"Funciona na minha máquina"** <br> Cada dev (ou IA) faz de um jeito diferente e quebra o padrão. | **Padronização RPI** <br> Todos seguem o mesmo fluxo: Research → Plan → Implement. Escalável de **1 a 10+ devs**. |
-| **Alucinação** <br> A IA inventa libs que não existem ou soluções inseguras. | **Skills Curadas** <br> Biblioteca com 600+ skills validadas (`library/skills`) que a IA *deve* consultar. |
+| Problema Real | % Tempo Perdido | Como a Factory Resolve |
+| :--- | :--- | :--- |
+| **Contexto perdido entre sessões** | ~20% | **Persistência em `context/` e `gaps.md`.** A IA nunca esquece. |
+| **Retrabalho por má especificação** | ~30% | **PRDs e Plans aprovados.** Nada é codado sem spec. |
+| **Inconsistência (Dev/IA faz do jeito dele)** | ~15% | **Metodologia RPI.** Padrão industrial de 1 a 10 devs. |
+| **"O que faltou mesmo?" (Gaps)** | ~10% | **Gap Tracking com Sugestão.** O sistema não trava, ele propõe. |
+| **Onboarding de novo dev** | ~15% | **Documentação Viva.** O código é a documentação. |
 
----
+> **Estimativa realista:** A Factory pode reduzir **40-50% do desperdício** em projetos complexos ao eliminar a "amnésia" e o retrabalho.
 
 ## 🎯 Para quem é isso?
 
