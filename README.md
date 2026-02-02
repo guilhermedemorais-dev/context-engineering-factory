@@ -1,32 +1,35 @@
 # 🏭 Factory (Context Engineering + Spec-driven Delivery)
 
-> **Framework (interno) para Context Engineering, Spec-driven Delivery e Governança de Entrega de Software.**
+> **Framework de Entrega Guiado por Contexto e Especificação.**
 > Compatível com qualquer IDE: **Cursor, Codex, Claude Code, Antigravity, Windsurf**, etc.
 
-A Factory existe para resolver um problema simples e ignorado:
-
-- IA **raramente falha por "não saber codar"**.
-- IA falha por **contexto mal definido**, **decisões não registradas** e **planos fracos**.
-
-A proposta aqui é transformar desenvolvimento com IA (e sem IA) em um processo **auditável**, **repetível** e **seguro**.
+A Factory existe para transformar o desenvolvimento de software com IA em um processo industrial: **Auditável, Repetível e Seguro.**
 
 ---
 
-## 🎯 O que é a Factory
+## 🛑 O Problema: Por que IA falha em projetos reais?
 
-A Factory é um **sistema operacional de entrega**.
+Se você já tentou criar software complexo com IA, conhece estas dores:
 
-Ela não "gera código magicamente". Ela define:
-- como **pesquisar** (com evidências)
-- como **decidir** (com registro)
-- como **planejar** (com escopo, passos e testes)
-- como **implementar** (com proteções)
-- como **validar** (com QA e gates)
-- como **publicar** (com controle humano)
+| A Dor (O Caos) | A Solução Factory (A Ordem) |
+| :--- | :--- |
+| **"Amnésia da IA"** <br> A IA esquece o que fez na sessão anterior ou perde o fio da meada. | **Contexto Persistente** <br> Memória estruturada em `factory-workflow/context` e `gaps.md`. O contexto nunca morre. |
+| **Microgerenciamento** <br> Você gasta mais tempo explicando *o que fazer* do que codando. | **Spec-driven** <br> PRDs viram PLANOS aprovados antes de virarem CÓDIGO. Menos chat, mais entrega. |
+| **"Funciona na minha máquina"** <br> Cada dev (ou IA) faz de um jeito diferente e quebra o padrão. | **Padronização RPI** <br> Todos seguem o mesmo fluxo: Research → Plan → Implement. Escalável de **1 a 10+ devs**. |
+| **Alucinação** <br> A IA inventa libs que não existem ou soluções inseguras. | **Skills Curadas** <br> Biblioteca com 600+ skills validadas (`library/skills`) que a IA *deve* consultar. |
 
 ---
 
-## 🧭 Workflow Canônico: RPI (Research → Plan → Implement)
+## 🎯 Para quem é isso?
+
+- **Dev Solo:** Que quer construir sistemas complexos sem se perder no meio do caminho.
+- **Startups (1-10 devs):** Que precisam de onboarding rápido e garantia de qualidade sem burocracia.
+- **Tech Leads:** Que querem garantir governança e auditoria sobre o código gerado por IA.
+
+---
+
+## 🏗️ Nova Arquitetura: "Verdade vs Fabricação"
+
 
 ```mermaid
 flowchart TD
