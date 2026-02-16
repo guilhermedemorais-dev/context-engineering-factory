@@ -151,6 +151,11 @@ Outputs:
 - Gaps: `factory-workflow/context/core/gaps.md`
 - Autopilot outputs: `factory-workflow/docs/autopilot/<feature>/` (when using runtime)
 
+## Context locality (important)
+
+The skill can be global, but the context is always **per project**.
+`context-sync` writes to `factory-workflow/context/*` inside the current project workspace.
+
 ## Path notes
 
 Some docs in this repo still reference `factory-workflow/docs/*`. The actual folder here is `factory-workflow/docs.fabrication/`. If a referenced path does not exist, map it to `docs.fabrication` and record a GAP if ambiguity remains.

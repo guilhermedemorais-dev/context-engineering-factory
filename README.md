@@ -244,6 +244,9 @@ python factory-workflow/bots/runtime/cli.py run context-sync \
   --workspace "."
 ```
 
+**Importante:** O contexto sempre fica **dentro do projeto** em `factory-workflow/context/*`.  
+A skill pode ser global, mas o contexto **não é global**.
+
 Autopilot:
 ```bash
 python factory-workflow/bots/runtime/cli.py autopilot-start \
