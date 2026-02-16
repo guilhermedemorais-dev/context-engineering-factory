@@ -192,6 +192,85 @@ A Factory foi projetada para **zero microgerenciamento**. Você só precisa dize
 
 ---
 
+## 🧩 Instalar a Skill no Codex (Global)
+
+Se você quer que a skill do Factory funcione em **qualquer projeto**, instale-a em `~/.codex/skills/`.
+
+Passo a passo:
+1. Crie a pasta de skills: `mkdir -p ~/.codex/skills`
+2. Copie a skill do Factory: `cp -R library/skills/factory-dev-workflow ~/.codex/skills/`
+3. Reinicie o Codex (ou sua IDE) para recarregar as skills.
+
+Isso garante que a skill seja carregada automaticamente em qualquer repo, sem precisar copiar o framework inteiro.
+
+---
+
+## 🧠 PRD Direto no Chat (Fluxo Esperado)
+
+Opção recomendada: **PRD em arquivo** (`docs.prd/`).
+
+Se o usuário colar o PRD no chat (fallback), o agente deve:
+1. Criar/atualizar `docs.prd/prd.md`, `docs.prd/tech.md`, `docs.prd/ui-ux.md` com o conteúdo.
+2. Rodar `context-sync` para distribuir o contexto.
+3. Gerar `plan.md` (DRAFT) com o RPI.
+4. Solicitar aprovação do plan.
+5. Executar implementação + QA após aprovação.
+
+**Objetivo do framework:** entregar software funcional e pronto para produção, com evidências de QA e gates satisfeitos. Se faltar informação, abrir GAP e parar.
+
+---
+
+## ✍️ Prompt Padrão (para o usuário)
+
+Cole este prompt no chat para iniciar um projeto:
+
+```
+Use a Factory.
+Meu PRD está em `docs.prd/`.
+Leia README.md e factory-workflow/context/INDEX.md.
+Rode context-sync e gere o plan.md (DRAFT).
+Peça minha aprovação antes de implementar.
+```
+
+---
+
+## ▶️ Comandos Essenciais (Runtime)
+
+Context-sync:
+```bash
+cp -R docs.prd docs
+python factory-workflow/bots/runtime/cli.py run context-sync \
+  --task "Distribuir PRDs de ./docs para factory-workflow/context" \
+  --workspace "."
+```
+
+Autopilot:
+```bash
+python factory-workflow/bots/runtime/cli.py autopilot-start \
+  --workspace "." \
+  --feature "current"
+```
+
+```bash
+python factory-workflow/bots/runtime/cli.py autopilot-build \
+  --workspace "." \
+  --feature "current" \
+  --project "/apps/<projeto>" \
+  --with-e2e
+```
+
+---
+
+## 🧭 Mini Guia (PRD → Produção)
+
+1. Cole o PRD completo no chat (ou coloque em `docs.prd/`).
+2. Diga: “Gere `docs.prd/prd.md`, `docs.prd/tech.md`, `docs.prd/ui-ux.md` e rode `context-sync`.”
+3. Diga: “Gere o `plan.md` (DRAFT) seguindo RPI e peça minha aprovação.”
+4. Após aprovação, diga: “Execute o `autopilot-build` com QA.”
+5. Valide evidências em `factory-workflow/tests/reports/**` e finalize.
+
+---
+
 ## 🛑 Tratamento de Gaps
 
 Quando o sistema encontra uma dúvida bloqueante, ele **para e te consulta**.
@@ -286,6 +365,17 @@ Este projeto foi inspirado e construído com base nas seguintes fontes:
 | Context7 | MCP para docs oficiais | [Context7](https://context7.com/) |
 | Shadcn/UI | Component registry | [Shadcn](https://ui.shadcn.com/) |
 | HuggingFace | Modelos e datasets | [HuggingFace](https://huggingface.co/) |
+
+---
+
+## 🧾 Índice de Atualizações (2026-02-16)
+
+- Adicionada a skill `factory-dev-workflow` com fluxo RPI, runtime/autopilot e skill-resolver.
+- Instruções para instalar a skill globalmente em `~/.codex/skills/`.
+- Fluxo recomendado para PRD em arquivo e fallback via chat.
+- Comandos essenciais do runtime e mini guia PRD → produção.
+- Prompt padrão enxuto para iniciar a fabricação.
+- Skill registrada em `library/skills/INDEX.md`.
 
 ---
 

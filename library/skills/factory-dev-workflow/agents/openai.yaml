@@ -1,0 +1,4 @@
+interface:
+  display_name: "Factory Dev Workflow"
+  short_description: "Help with Factory Dev Workflow tasks"
+  default_prompt: "Follow Factory RPI (Research -> Plan -> Implement), run context-sync on docs/*.md, prefer runtime autopilot (autopilot-start/build), enforce plan approval and policy-engine, capture QA evidence, and only claim production-ready after gates; avoid mockups unless asked."
