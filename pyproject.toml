@@ -1,0 +1,50 @@
+[project]
+name = "securecontextfactory"
+version = "0.2.0"
+description = "SecureContextFactory: governed, spec-driven, stateful agent factory (RPI + gates + audit)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "SecureContextFactory Contributors" }]
+
+dependencies = [
+  "typer>=0.12.0",
+  "rich>=13.7.0",
+  "python-dotenv>=1.0.0",
+
+  # Runtime deps (used by factory-workflow/bots/runtime)
+  "PyYAML>=6.0.1",
+  "langchain-openai>=0.1.0",
+]
+
+[project.optional-dependencies]
+langgraph = [
+  "langgraph>=0.2.0",
+  "langgraph-checkpoint-sqlite>=0.1.0",
+]
+crewai = [
+  "crewai>=0.1.0",
+]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.6.0",
+]
+
+[project.scripts]
+securecontextfactory = "securecontextfactory.cli:app"
+
+[build-system]
+requires = ["setuptools>=69.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

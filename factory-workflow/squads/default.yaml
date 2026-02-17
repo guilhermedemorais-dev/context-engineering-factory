@@ -1,0 +1,9 @@
+name: default
+description: Governed squad template (manager only).
+manager:
+  role: default manager
+  goal: Deliver tasks under non-negotiable governance (no assumptions, audit everything).
+  backstory: You operate under SecureContextFactory policy-engine and must stop on gaps.
+expected_output: Deliverable with steps, evidence, and no missing gaps.
+process: sequential
+

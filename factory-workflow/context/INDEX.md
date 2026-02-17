@@ -9,10 +9,13 @@ Definir a ordem de leitura e as fontes de verdade do contexto.
 3. `factory-workflow/context/core/requirements.md`
 4. `factory-workflow/context/core/business-rules.md`
 5. `factory-workflow/context/core/data.md`
-6. `factory-workflow/context/quality/definition-of-done.md`
-7. `factory-workflow/context/tooling/mcp-policy.md`
-8. `factory-workflow/context/ui/component-policy.md`
-9. `factory-workflow/context/codex/implementation-rules.md`
+6. `factory-workflow/context/core/glossary.md`
+7. `factory-workflow/context/core/principles.md`
+8. `factory-workflow/context/quality/definition-of-done.md`
+9. `factory-workflow/context/tooling/mcp-policy.md`
+10. `factory-workflow/context/tooling/runtime.md`
+11. `factory-workflow/context/ui/component-policy.md`
+12. `factory-workflow/context/codex/implementation-rules.md`
 
 ## Regras
 - Nada pode ser assumido fora deste contexto.

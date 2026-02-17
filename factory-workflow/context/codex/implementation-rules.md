@@ -9,6 +9,7 @@ Definir o processo obrigatorio de implementacao para o Codex/bot-dev.
 3. Se faltar informacao: registrar em `factory-workflow/context/core/gaps.md` e parar.
 4. Reuso obrigatorio via MCP/registry/design-system.
    - `factory-workflow/context/tooling/mcp-policy.md` (se existir)
+   - `factory-workflow/context/tooling/runtime.md` (contrato do runtime)
    - `factory-workflow/context/ui/component-policy.md` (se existir)
    - `factory-workflow/design-system/*` (se existir)
 5. Implementar e atualizar testes conforme `factory-workflow/tests/*`.

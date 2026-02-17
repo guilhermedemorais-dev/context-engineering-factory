@@ -1,12 +1,12 @@
 ---
 name: factory-dev-workflow
-description: Apply the Factory (Context Engineering + Spec-driven Delivery) workflow for software development in this repo. Use when planning, researching, or implementing features with RPI (Research to Plan to Implement), when creating or using PRDs in `docs.prd/`, when enforcing context loading from `factory-workflow/context/INDEX.md`, or when policy/gate compliance (plan approval, QA evidence, gap tracking) is required.
+description: Apply the SecureContextFactory (Context Engineering + Spec-driven Delivery) workflow for software development in this repo. Use when planning, researching, or implementing features with RPI (Research to Plan to Implement), when creating or using PRDs in `docs.prd/`, when enforcing context loading from `factory-workflow/context/INDEX.md`, or when policy/gate compliance (plan approval, QA evidence, gap tracking) is required.
 ---
 
-# Factory Dev Workflow
+# SecureContextFactory Dev Workflow
 
 ## Overview
-Enforce the Factory RPI workflow (Research → Plan → Implement), governance, and QA gates. Prefer the runtime/autopilot for automated delivery and the skill-resolver for routing and gap detection.
+Enforce the SecureContextFactory RPI workflow (Research → Plan → Implement), governance, and QA gates. Prefer the runtime/autopilot for automated delivery and the skill-resolver for routing and gap detection.
 Deliver production-ready software only after QA evidence and gates are satisfied. Avoid mockups unless explicitly requested.
 
 ## Workflow (RPI + Gates)
@@ -69,6 +69,12 @@ python factory-workflow/bots/runtime/cli.py autopilot-build \
   --with-e2e
 ```
 
+SecureContextFactory CLI wrappers:
+```bash
+securecontextfactory autopilot-start --workspace "." --feature "current"
+securecontextfactory autopilot-build --workspace "." --feature "current" --project "/apps/<project>" --with-e2e
+```
+
 ### Context-sync and planner (manual runtime)
 ```bash
 cp -R docs.prd docs
@@ -96,6 +102,7 @@ python factory-workflow/bots/runtime/cli.py run planner \
 - Confirm `plan.md` has `Status: APPROVED` and reviewer/date filled.
 - Confirm target paths match the plan (dev bot writes only under `/apps/<project>`).
 - Confirm QA evidence path is known: `factory-workflow/tests/reports/**`.
+- Optional: run `securecontextfactory doctor` to validate environment and governance quickly.
 
 ## Recommended Standard Flow (Factory)
 

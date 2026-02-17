@@ -1,7 +1,11 @@
 # Python
 .venv/
+.scf-venv/
 __pycache__/
 *.pyc
+build/
+dist/
+*.egg-info/
 
 # Local env
 .env

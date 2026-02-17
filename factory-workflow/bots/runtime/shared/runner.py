@@ -64,30 +64,84 @@ def _parse_response(text: str) -> Dict[str, Any]:
     }
 
 
+def _guess_suggestion(bot_name: str, gap: str) -> str:
+    g = (gap or "").lower()
+
+    if "missing required project docs file" in g or "/docs/" in g:
+        return "Criar/atualizar os arquivos em ./docs (copie de docs.prd) e rerodar context-sync."
+
+    if "--project" in g or "requires --project" in g:
+        return "Reexecutar com --project /apps/<projeto> para restringir escrita do dev bot."
+
+    if "mcp config" in g or "mcp.toml" in g:
+        return "Rodar o wizard kickconfig e configurar as ENV vars no .env; depois rerodar o bot."
+
+    if "chrome_devtools" in g:
+        return "Habilitar [chrome_devtools] no mcp.toml e configurar CHROME_DEVTOOLS_ENDPOINT (ou deferir e usar Playwright como fallback)."
+
+    if "permission" in g or "permiss" in g:
+        return "Rever paths permitidos (plan + runtime policy) e ajustar escopo; depois rerodar."
+
+    return "Registrar a decisao/ajuste necessario no plan/contexto e rerodar. Se for decisao humana, responda 'Aplique a sugestao do GAP-...'."
+
+
+def _sanitize_one_line(text: str, *, max_len: int = 300) -> str:
+    # Avoid multiline / huge injections in markdown gaps.
+    s = " ".join((text or "").split())
+    if len(s) > max_len:
+        return s[: max_len - 3] + "..."
+    return s
+
+
+def _insert_gap_under_open(existing: str, entry_block: str) -> str:
+    marker_open = "## Gaps Abertos"
+    marker_resolved = "## Gaps Resolvidos"
+
+    if marker_open not in existing or marker_resolved not in existing:
+        # Fallback: append at end in a minimal layout.
+        return existing.rstrip() + "\n\n" + marker_open + "\n\n" + entry_block.rstrip() + "\n\n" + marker_resolved + "\n"
+
+    before, after = existing.split(marker_resolved, 1)
+
+    # Remove placeholder if present.
+    before = before.replace("(sem gaps abertos no momento)\n", "")
+    before = before.replace("(sem gaps abertos no momento)\r\n", "")
+
+    if not before.endswith("\n"):
+        before += "\n"
+
+    return before.rstrip() + "\n\n" + entry_block.rstrip() + "\n\n" + marker_resolved + after
+
+
 def _append_gaps(fs: SafeFS, gaps_path: Path, bot_name: str, task: str, gaps: Iterable[str]) -> None:
-    ts = datetime.utcnow().isoformat() + "Z"
-    entries = []
+    entries: list[str] = []
     for idx, gap in enumerate(gaps, start=1):
+        gap_id = f"GAP-RUNTIME-{bot_name.upper()}-{_now_id()}-{idx}"
+        gap_s = _sanitize_one_line(gap, max_len=500)
+        task_s = _sanitize_one_line(task, max_len=200)
+        suggestion = _sanitize_one_line(_guess_suggestion(bot_name, gap), max_len=500)
         entries.append(
             "\n".join(
                 [
-                    "",
-                    f"ID: {bot_name}-{_now_id()}-{idx}",
-                    f"Date: {ts}",
-                    f"Source: runtime/{bot_name}",
-                    f"Description: {gap}",
-                    "Impact: BLOCKED",
-                    "Needed decision: TBD",
-                    "Owner: TBD",
-                    "Status: open",
+                    f"### {gap_id}",
+                    f"- ID: {gap_id}",
+                    f"- Data: {datetime.utcnow().date().isoformat()}",
+                    f"- Descricao: {gap_s}",
+                    "- Impacto: BLOQUEIA",
+                    "- Owner: TBD",
+                    "- Status: OPEN",
+                    f"- Source: runtime/{bot_name}",
+                    f"- Task: {task_s}",
+                    f"- **Sugestao de Solucao:** {suggestion}",
                 ]
             )
         )
-    content = "\n".join(entries) + "\n"
-    existing = ""
-    if fs.exists(gaps_path):
-        existing = fs.read_text(gaps_path)
-    fs.write_text(gaps_path, existing + content)
+
+    entry_block = "\n\n".join(entries) + "\n"
+
+    existing = fs.read_text(gaps_path) if fs.exists(gaps_path) else ""
+    merged = _insert_gap_under_open(existing, entry_block)
+    fs.write_text(gaps_path, merged)
 
 
 def run_bot(

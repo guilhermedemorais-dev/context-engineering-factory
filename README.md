@@ -1,17 +1,23 @@
-# 🏭 Factory (Context Engineering + Spec-driven Delivery)
+# SecureContextFactory
 
-> **Framework de Entrega Guiado por Contexto e Especificação.**
-> Compatível com qualquer IDE: **Cursor, Codex, Claude Code, Antigravity, Windsurf**, etc.
+> **Framework Python-first de entrega guiada por contexto e especificacao, com governanca inegociavel.**
+> Compatível com qualquer IDE/executor: **Cursor, Codex, Claude Code, Antigravity, Windsurf**, etc.
 
-A Factory existe para transformar o desenvolvimento de software com IA em um processo industrial: **Auditável, Repetível e Seguro.**
+SecureContextFactory transforma desenvolvimento com IA em um processo industrial: **auditavel, repetivel e seguro**.
+O core e a governanca (gates, policies, gaps forcados, audit trail e aprovacao humana para risco).
+
+Direcao de fusao (camadas opcionais):
+- UX/arquitetura inspiradas no SynkraAI/aios-core (wizard, squads, pipeline ADE-like) reimplementadas em Python.
+- Orquestracao stateful (LangGraph) como camada opcional.
+- Squads/crews colaborativos (CrewAI) como camada opcional.
 
 ---
 
-## � A Ciência da Ineficiência: Por que 50% do tempo é perdido?
+## A Ciencia da Ineficiencia: por que tanto tempo e perdido?
 
-Não é mágica, é processo. A Factory ataca diretamente os gargalos invisíveis do desenvolvimento com IA:
+Nao e magica, e processo. SecureContextFactory ataca gargalos invisiveis do desenvolvimento com IA:
 
-| Problema Real | % Tempo Perdido | Como a Factory Resolve |
+| Problema Real | % Tempo Perdido | Como a SecureContextFactory resolve |
 | :--- | :--- | :--- |
 | **Contexto perdido entre sessões** | ~20% | **Persistência em `context/` e `gaps.md`.** A IA nunca esquece. |
 | **Retrabalho por má especificação** | ~30% | **PRDs e Plans aprovados.** Nada é codado sem spec. |
@@ -19,9 +25,9 @@ Não é mágica, é processo. A Factory ataca diretamente os gargalos invisívei
 | **"O que faltou mesmo?" (Gaps)** | ~10% | **Gap Tracking com Sugestão.** O sistema não trava, ele propõe. |
 | **Onboarding de novo dev** | ~15% | **Documentação Viva.** O código é a documentação. |
 
-> **Estimativa realista:** A Factory pode reduzir **40-50% do desperdício** em projetos complexos ao eliminar a "amnésia" e o retrabalho.
+> Estimativa pratica: SecureContextFactory pode reduzir desperdicio em projetos complexos ao eliminar "amnesia" e retrabalho via RPI + contexto persistente + gates.
 
-## 🎯 Para quem é isso?
+## Para quem e isso?
 
 - **Dev Solo:** Que quer construir sistemas complexos sem se perder no meio do caminho.
 - **Startups (1-10 devs):** Que precisam de onboarding rápido e garantia de qualidade sem burocracia.
@@ -29,7 +35,7 @@ Não é mágica, é processo. A Factory ataca diretamente os gargalos invisívei
 
 ---
 
-## 🏗️ Nova Arquitetura: "Verdade vs Fabricação"
+## Arquitetura: "Verdade vs Fabricacao"
 
 
 ```mermaid
@@ -37,7 +43,7 @@ flowchart TD
     A[💡 Ideia] --> B[🔎 Research]
     B --> C[🧭 Plan]
     C --> D[🧱 Implement]
-    D --> E[� Testes]
+    D --> E[🧪 Testes]
     E --> F[🚦 Gates]
     F --> G[🚀 Deploy]
 ```
@@ -49,15 +55,15 @@ flowchart TD
 
 ---
 
-## 🏗️ Arquitetura de Pastas
+## Arquitetura de pastas
 
-A Factory organiza o projeto em três "mundos" distintos para evitar confusão:
+SecureContextFactory organiza o projeto em mundos distintos para evitar confusao:
 
 | Pasta | Propósito | Quem Escreve | Quem Lê |
 |-------|-----------|--------------|---------|
 | `docs.prd/` | **Fonte da Verdade.** PRDs em linguagem natural (PT-BR/EN). | Você / GPT Architect | Bot Planner |
 | `library/` | **Biblioteca de Consulta.** Skills (600+), Tooling, MCPs. | Sistema / Importação | Todos os Bots |
-| `factory-workflow/` | **Motor da Fábrica.** Contexto, Bots, CI/CD, Governance. | Bots / Orquestrador | Bots / Sistema |
+| `factory-workflow/` | **Motor (governanca + runtime).** Contexto, Bots, CI/CD, Governance. | Bots / Orquestrador | Bots / Sistema |
 | `factory-workflow/docs.fabrication/` | **Specs Técnicas.** Roadmap, Milestones, Dependencies. | Bot Planner | Bots Dev/Architect |
 
 ### Detalhamento:
@@ -73,9 +79,9 @@ A Factory organiza o projeto em três "mundos" distintos para evitar confusão:
 
 ---
 
-## 🤖 Modelo de Execução (Híbrido)
+## Modelo de execucao (hibrido)
 
-A Factory foi projetada para funcionar com **qualquer executor de IA**:
+SecureContextFactory foi projetada para funcionar com **qualquer executor de IA**:
 
 | Executor | Tipo | Descrição |
 |----------|------|-----------|
@@ -84,7 +90,7 @@ A Factory foi projetada para funcionar com **qualquer executor de IA**:
 | **Codex (OpenAI)** | API/CLI | Executor de código. |
 | **Antigravity** | IDE | Assistente integrado. |
 | **Windsurf** | IDE | Assistente integrado. |
-| **Bots Python (CLI)** | Runtime | Bots internos da Factory (`factory-workflow/bots/runtime/`). |
+| **Bots Python (CLI)** | Runtime | Bots internos da SecureContextFactory (`factory-workflow/bots/runtime/`). |
 
 **Regra de Ouro:**
 - O **Executor de IA** (IDE ou CLI) **edita arquivos**.
@@ -93,7 +99,7 @@ A Factory foi projetada para funcionar com **qualquer executor de IA**:
 
 ---
 
-## 🧠 Fontes de Verdade e Governança
+## Fontes de verdade e governanca
 
 - **Ordem de leitura do contexto (obrigatória):** `factory-workflow/context/INDEX.md`
 - **Políticas (não-opcionais):** `factory-workflow/policies/policy-engine.md`
@@ -102,7 +108,7 @@ A Factory foi projetada para funcionar com **qualquer executor de IA**:
 
 ---
 
-## 🔐 Regras Inegociáveis
+## Regras inegociaveis
 
 1. **Contexto fechado** antes de executar.
 2. **Plan aprovado** antes de implementar.
@@ -111,7 +117,7 @@ A Factory foi projetada para funcionar com **qualquer executor de IA**:
 
 ---
 
-## ⚙️ Configuração Inicial (MCPs e Ferramentas)
+## Configuracao inicial (MCPs e ferramentas)
 
 **IMPORTANTE:** Antes de iniciar a fabricação, o sistema precisa de MCPs configurados. Quando você enviar o primeiro prompt, a IA irá auditar a configuração e trazer um **Gap de Configuração** se algo estiver faltando.
 
@@ -160,7 +166,7 @@ Edite `factory-workflow/config/mcp.toml` e mude `enabled = true` para os MCPs qu
 Use este prompt para iniciar qualquer projeto novo:
 
 ```
-Leia e entenda a documentação do Factory (README.md e factory-workflow/context/INDEX.md).
+Leia e entenda a documentação do SecureContextFactory (README.md e factory-workflow/context/INDEX.md).
 Depois, leia todos os arquivos em docs.prd/.
 Antes de iniciar a fabricação, audite se os MCPs estão configurados corretamente.
 Se houver gaps de configuração, traga-os com sugestões de solução.
@@ -169,12 +175,11 @@ Após a configuração estar OK, inicie a fabricação seguindo a metodologia RP
 
 ---
 
-## 🚀 Como Usar (Um Único Comando)
+## Como usar (one-command)
 
+SecureContextFactory foi projetada para **zero microgerenciamento**. Você só precisa dizer uma frase:
 
-A Factory foi projetada para **zero microgerenciamento**. Você só precisa dizer uma frase:
-
-> **"Leia e entenda a documentação do Factory, depois leia os arquivos em `docs.prd/` e inicie a fabricação."**
+> **"Leia e entenda a documentação do SecureContextFactory, depois leia os arquivos em `docs.prd/` e inicie a fabricação."**
 
 **O que acontece automaticamente:**
 1. O sistema lê a metodologia (`README.md`, `factory-workflow/context/INDEX.md`).
@@ -184,21 +189,21 @@ A Factory foi projetada para **zero microgerenciamento**. Você só precisa dize
 5. Se encontrar dúvidas, registra um **Gap com Sugestão de Solução**.
 
 ### Novo Projeto (Passo a Passo)
-1. Clone o repositório Factory para a raiz do seu projeto.
+1. Clone o repositório SecureContextFactory para a raiz do seu projeto.
 2. Coloque seus PRDs em `docs.prd/`.
 3. Abra sua IDE (Cursor, Claude, Codex, Antigravity, etc.).
-4. Diga: *"Leia a documentação do Factory e os PRDs, e inicie a fabricação."*
+4. Diga: *"Leia a documentação do SecureContextFactory e os PRDs, e inicie a fabricação."*
 5. Pronto. O sistema cuida do resto.
 
 ---
 
-## 🧩 Instalar a Skill no Codex (Global)
+## Instalar a skill no Codex (global)
 
-Se você quer que a skill do Factory funcione em **qualquer projeto**, instale-a em `~/.codex/skills/`.
+Se voce quer que a skill do SecureContextFactory funcione em qualquer projeto, instale-a em `~/.codex/skills/`.
 
 Passo a passo:
 1. Crie a pasta de skills: `mkdir -p ~/.codex/skills`
-2. Copie a skill do Factory: `cp -R library/skills/factory-dev-workflow ~/.codex/skills/`
+2. Copie a skill do SecureContextFactory: `cp -R library/skills/factory-dev-workflow ~/.codex/skills/`
 3. Reinicie o Codex (ou sua IDE) para recarregar as skills.
 
 Isso garante que a skill seja carregada automaticamente em qualquer repo, sem precisar copiar o framework inteiro.
@@ -225,7 +230,7 @@ Se o usuário colar o PRD no chat (fallback), o agente deve:
 Cole este prompt no chat para iniciar um projeto:
 
 ```
-Use a Factory.
+Use SecureContextFactory.
 Meu PRD está em `docs.prd/`.
 Leia README.md e factory-workflow/context/INDEX.md.
 Rode context-sync e gere o plan.md (DRAFT).
@@ -234,7 +239,54 @@ Peça minha aprovação antes de implementar.
 
 ---
 
-## ▶️ Comandos Essenciais (Runtime)
+## CLI (securecontextfactory)
+
+Instalacao (repo):
+```bash
+pip install -e .
+```
+
+Instalacao com integracoes opcionais (LangGraph + CrewAI):
+```bash
+pip install -e ".[langgraph,crewai]"
+```
+
+Bootstrap + MCP wizard (opcional):
+```bash
+securecontextfactory init
+securecontextfactory install --kickconfig
+```
+
+Diagnostico:
+```bash
+securecontextfactory doctor
+```
+
+Hooks no workspace (VSCode/Cursor/AGENTS):
+```bash
+securecontextfactory hook install all
+```
+
+Autopilot (wrappers do runtime):
+```bash
+securecontextfactory autopilot-start --feature "current"
+securecontextfactory autopilot-build --feature "current" --project "apps/<projeto>" --with-e2e
+```
+
+Squads (CrewAI opcional):
+```bash
+securecontextfactory squad list
+securecontextfactory run-squad default --feature "current" --task "..."
+```
+
+Auditoria rapida:
+```bash
+securecontextfactory audit --feature "current"
+```
+
+---
+
+## Comandos essenciais (runtime)
 
 Context-sync:
 ```bash
@@ -343,7 +395,7 @@ Quando o sistema encontra uma dúvida bloqueante, ele **para e te consulta**.
 
 ## 📚 Créditos e Referências
 
-Este projeto foi inspirado e construído com base nas seguintes fontes:
+Este projeto e inspirado por e referencia as seguintes fontes (metodologias, docs e ferramentas):
 
 ### Metodologias e Conceitos
 | Conceito | Fonte | Link |
@@ -384,4 +436,6 @@ Este projeto foi inspirado e construído com base nas seguintes fontes:
 
 ## 📄 Licença
 
-Este projeto é de uso interno. Consulte `LICENSE` para detalhes.
+Apache-2.0. Veja `LICENSE`.
+
+Aviso: integracoes opcionais tem licencas proprias. Veja `THIRD_PARTY_NOTICES.md`.
